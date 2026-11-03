@@ -1,0 +1,187 @@
+HANDOVER-BENCH: WINDOWS AND macOS SETUP GUIDE
+
+You need Python 3.10 or later (Python 3.11 recommended) and an internet
+connection for the initial installation. You do not need SUMO, MATLAB,
+Docker or a GPU.
+
+1. EXTRACT THE PACKAGE
+
+Download student.zip and extract it fully. Open the extracted folders
+until you find handover-bench, containing:
+
+    README.md
+    pyproject.toml
+    examples
+    data
+    src
+
+Use this folder for all commands below. Do not run commands inside the ZIP.
+
+2. OPEN A TERMINAL IN THE PACKAGE FOLDER
+
+Windows:
+- Open handover-bench in File Explorer.
+- Click the address bar, type cmd, and press Enter.
+- Use Command Prompt for all Windows commands in this guide.
+
+macOS:
+- Open Terminal.
+- Type cd followed by a space.
+- Drag the handover-bench folder from Finder into Terminal.
+- Press Return.
+
+Check that you are in the correct folder:
+
+Windows:
+    dir
+
+macOS:
+    ls
+
+You should see README.md and pyproject.toml.
+
+3. CHECK PYTHON
+
+Windows:
+    py -3 --version
+
+macOS:
+    python3 --version
+
+The version must be 3.10 or later. If Python is missing or older, install
+Python 3.11, close the terminal, and repeat Step 2.
+
+Python installers are available at https://www.python.org/downloads/
+On Windows, select "Add python.exe to PATH" when installing Python.
+
+4. CREATE AND ACTIVATE A VIRTUAL ENVIRONMENT
+
+Run each command separately.
+
+Windows (Command Prompt):
+    py -3 -m venv .venv
+    .venv\Scripts\activate.bat
+
+macOS:
+    python3 -m venv .venv
+    source .venv/bin/activate
+
+Your terminal prompt should now start with (.venv).
+
+5. INSTALL THE PACKAGE
+
+Use the same command on both systems:
+
+    python -m pip install -e .
+
+Include the final dot. Keep your internet connection active and wait until
+installation finishes successfully.
+
+You only need to install the package once per virtual environment.
+
+6. CREATE YOUR WORKING ALGORITHM FILE
+
+Copy the supplied starter into the main package folder.
+
+Windows:
+    copy examples\algorithm.py algorithm.py
+
+macOS:
+    cp examples/algorithm.py algorithm.py
+
+Do this ONCE. Repeating the copy command can overwrite your changes.
+
+Open the new algorithm.py in your code editor. This is the file you will
+edit. Keep its filename exactly algorithm.py, not algorithm.py.txt.
+Fill in the team details comment at the top before submitting.
+
+7. RUN THE EVALUATION
+
+Use the same command on both systems. Enter it as one line:
+
+    python -m handover_bench.cli evaluate --algorithm algorithm.py --suite data/practice --output results/practice
+
+Wait for it to finish. The evaluator may remain quiet while running.
+
+For the unchanged starter, the expected results are:
+
+    Your score:       84.93
+    A3 baseline:     100.0
+    Never hand over:  84.93
+
+The supplied starter demonstrates the interface. You must develop your
+own algorithm for submission. Submitting the unchanged sample fails the
+assignment under the supplied instructions.
+
+Running python algorithm.py alone does NOT run the evaluation.
+The ten practice scenarios are already supplied; do not regenerate them.
+
+8. VIEW THE DASHBOARD
+
+Using File Explorer or Finder, open:
+
+    handover-bench/results/practice/dashboard.html
+
+Double-click dashboard.html. If necessary, right-click it and choose
+Open with your web browser.
+
+The dashboard works offline and requires no server. It shows your score,
+KPI comparisons and per-scenario results. The machine-readable results
+are saved alongside it in results.json.
+
+9. EDIT AND RUN AGAIN
+
+Each time you change algorithm.py:
+- Save the file.
+- Run the evaluation command from Step 7.
+- Wait for successful completion.
+- Reload the dashboard in your browser.
+
+You do not need to reinstall the package or copy the starter again.
+
+10. RESUME AFTER CLOSING THE TERMINAL
+
+Open a terminal in handover-bench again, then activate the existing
+environment.
+
+Windows:
+    .venv\Scripts\activate.bat
+
+macOS:
+    source .venv/bin/activate
+
+Then run this command as one line:
+
+    python -m handover_bench.cli evaluate --algorithm algorithm.py --suite data/practice --output results/practice
+
+COMMON PROBLEMS
+
+Python command is not recognised:
+    Install Python, close the terminal and open a new one.
+
+No module named handover_bench:
+    Activate .venv, then run python -m pip install -e . again.
+
+pyproject.toml cannot be found during installation:
+    Return to the handover-bench folder before installing.
+
+algorithm.py cannot be found:
+    Complete Step 6 and check that the filename is not algorithm.py.txt.
+
+ data/practice cannot be found:
+    Run from handover-bench and check that the ZIP was fully extracted.
+
+PowerShell blocks activation:
+    Open Command Prompt and use the Windows commands above.
+
+Installation reports connection errors:
+    Check your internet connection and retry Step 5.
+
+Evaluation reports an error:
+    Read the terminal message and check your code. An existing dashboard
+    may show an earlier run; confirm that the new evaluation succeeded.
+
+SUBMISSION REMINDER
+
+Follow Document 1 for the full assignment and marking instructions.
+Submit your developed algorithm.py and your group's report.pdf.
